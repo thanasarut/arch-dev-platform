@@ -1,0 +1,13 @@
+sudo
+git
+vim
+curl
+wget
+jq
+tree
+openssh
+rsync
+unzip
+zip
+base-devel
+
