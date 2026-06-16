@@ -4,8 +4,13 @@ FROM menci/archlinuxarm:base-devel
 
 COPY packages.txt /tmp/
 
-RUN pacman -Syu --noconfirm && \
-    pacman -S --needed --noconfirm $(cat /tmp/packages.txt) && \
+RUN pacman-key --init && \
+    pacman-key --populate archlinux || true && \
+    pacman-key --populate archlinuxarm || true && \
+    pacman -Sy --noconfirm archlinux-keyring || true && \
+    pacman -Sy --noconfirm archlinuxarm-keyring || true && \
+    pacman -Syu --noconfirm && \
+    pacman -S --needed --noconfirm $(grep -vE '^\s*(#|$)' /tmp/packages.txt) && \
     pacman -Scc --noconfirm
 
 RUN useradd -m dev && echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
