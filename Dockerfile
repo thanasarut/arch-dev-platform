@@ -7,8 +7,8 @@ COPY packages.txt /tmp/
 RUN pacman-key --init && \
     pacman-key --populate archlinux || true && \
     pacman-key --populate archlinuxarm || true && \
-    pacman -Sy --noconfirm archlinux-keyring || true && \
-    pacman -Sy --noconfirm archlinuxarm-keyring || true && \
+    pacman -Sy --noconfirm archlinux-keyring openssl pacman || true && \
+    pacman -Sy --noconfirm archlinuxarm-keyring openssl pacman || true && \
     pacman -S --needed --noconfirm $(grep -vE '^\s*(#|$)' /tmp/packages.txt) && \
     pacman -Scc --noconfirm
 
