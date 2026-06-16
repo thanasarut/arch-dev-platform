@@ -9,7 +9,6 @@ RUN pacman-key --init && \
     pacman-key --populate archlinuxarm || true && \
     pacman -Sy --noconfirm archlinux-keyring || true && \
     pacman -Sy --noconfirm archlinuxarm-keyring || true && \
-    pacman -Syu --noconfirm && \
     pacman -S --needed --noconfirm $(grep -vE '^\s*(#|$)' /tmp/packages.txt) && \
     pacman -Scc --noconfirm
 
