@@ -1,11 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG TARGETARCH 
-
-FROM archlinux:latest as base-amd64
-FROM menci/archlinuxarm:base-devel AS base-arm64
-
-FROM base-$(TARGETARCH}
+FROM menci/archlinuxarm:base-devel
 
 COPY packages.txt /tmp/
 
