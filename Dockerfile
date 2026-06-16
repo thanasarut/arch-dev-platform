@@ -8,9 +8,14 @@ RUN sed -i '/^\[options\]/a DisableSandbox' /etc/pacman.conf && \
     pacman-key --init && \
     pacman-key --populate archlinux || true && \
     pacman-key --populate archlinuxarm || true && \
-    pacman -Sy --noconfirm archlinux-keyring openssl pacman || true && \
-    pacman -Sy --noconfirm archlinuxarm-keyring openssl pacman || true && \
-    pacman -S --needed --noconfirm $(grep -vE '^\s*(#|$)' /tmp/packages.txt) && \
+    pacman -S7 --needed --noconfirm \
+      archlinux-keyring \
+      openssl \
+      curl \
+      libssh2 \
+      libngtcp2 \
+      pacman \
+      $(grep -vE '^\s*(#|$)' /tmp/packages.txt) && \
     pacman -Scc --noconfirm
 
 RUN useradd -m dev && echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
