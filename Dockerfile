@@ -4,7 +4,7 @@ FROM menci/archlinuxarm:base-devel
 
 COPY packages.txt /tmp/
 
-RUN echo 'DisableSandbox' >> /etc/pacman.conf && \
+RUN sed -i '/^\[options\]/a DisableSandbox' /etc/pacman.conf && \
     pacman-key --init && \
     pacman-key --populate archlinux || true && \
     pacman-key --populate archlinuxarm || true && \
