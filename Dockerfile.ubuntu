@@ -10,6 +10,11 @@ RUN apt-get update && \
       python3 python3-pip nodejs npm tmux && \
     rm -rf /var/lib/apt/lists/*
 
+COPY bootstrap/bootstrap-system.sh /usr/local/bin/bootstrap-system
+RUN chmod +x /usr/local/bin/bootstrap-system
+COPY bootstrap/bootstrap-user.sh /usr/local/bin/bootstrap-user
+RUN chmod +x /usr/local/bin/bootstrap-user
+
 RUN useradd -m -s /bin/bash dev && \
     echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
